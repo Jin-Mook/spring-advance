@@ -9,6 +9,9 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * User를 상속받아서 jwt 인증에 필요한 기능들을 추가할 수 있다.
+ */
 @Getter
 public class AccountAdapter extends User {
 
