@@ -1,6 +1,7 @@
 package com.kt.myrestapi.accounts;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AccountService implements UserDetailsService {
     
     private final AccountRepository accountRepository;
@@ -28,8 +30,10 @@ public class AccountService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException(username));
-
+        log.info("username = {}", username);
+//        Account account = accountRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        Account account = accountRepository.findByEmail(username).get();
+        log.info("account id = {}, email = {}", account.getId(), account.getEmail());
         return new AccountAdapter(account);
     }
 
