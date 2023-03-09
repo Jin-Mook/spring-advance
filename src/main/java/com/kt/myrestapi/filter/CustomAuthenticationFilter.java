@@ -47,6 +47,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
+        log.info("CustomAuthenticationFilter start...");
         try {
             RequestLogin requestLogin =
                     new ObjectMapper().readValue(request.getInputStream(), RequestLogin.class);

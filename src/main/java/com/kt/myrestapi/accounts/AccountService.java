@@ -46,4 +46,9 @@ public class AccountService implements UserDetailsService {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         return accountRepository.save(account);
     }
+
+    public Account getAccountByAccountId(String accountId) {
+        Account account = accountRepository.findById(Integer.valueOf(accountId)).orElseThrow(() -> new UsernameNotFoundException(accountId));
+        return account;
+    }
 }
